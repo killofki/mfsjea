@@ -11,11 +11,20 @@ const composeString = str => [ ... str ]
 const convert = c => { 
 	let cc = code( c ) 
 	let CC = cc & 0xff 
-	
-	return isCho( c ) ? 0x1000_0000 | CC + 0x01 << 0x10 
-		: isJung( c ) ? 0x1000_0000 | CC - 0x60 << 0x08 
-		: isJong( c ) ? 0x1000_0000 | CC - 0xa7 
-		: cc 
+	switch( true ) { 
+		case isCho( c ) : 
+			CC = CC + 0x01 << 0x10 
+			break 
+		case isJung( c ) : 
+			CC = CC - 0x60 << 0x08 
+			break 
+		case isJong( c ) : 
+			CC = CC - 0xa7 
+			break 
+		default : 
+			return cc 
+		} 
+	return 0x1000_0000 | CC 
 	} // -- convert() 
 const reverse = code => ( isHangulCode( code ) ? decode(code) : [ ( code & 0xff_ffff ) ] ) 
 	.filter( code => code != 0 ) 
