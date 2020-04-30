@@ -39,7 +39,21 @@ const LAYOUT_SEBEOL_FINAL = ' *※ᇂᆩᆻᆰᆸᆽᅭᆵᅲᆴᅣ=ᅨ“ᅴ”
 const COMB_DUBEOL_STANDARD = {cho: {}, jung: {'ㅗㅏ':'ㅘ', 'ㅗㅐ':'ㅙ', 'ㅗㅣ':'ㅚ', 'ㅜㅓ':'ㅝ', 'ㅜㅔ':'ㅞ', 'ㅜㅣ':'ㅟ', 'ㅡㅣ':'ㅢ'}, jong: {'ㄱㅅ':'ㄳ', 'ㄴㅈ':'ㄵ', 'ㄴㅎ':'ㄶ', 'ㄹㄱ':'ㄺ', 'ㄹㅁ':'ㄻ', 'ㄹㅂ':'ㄼ', 'ㄹㅅ':'ㄽ', 'ㄹㅌ':'ㄾ', 'ㄹㅍ':'ㄿ', 'ㄹㅎ':'ㅀ', 'ㅂㅅ':'ㅄ'}} 
 
 const COMB_SEBEOL_390 = {cho: {'ᄀᄀ':'ᄁ', 'ᄃᄃ':'ᄄ', 'ᄇᄇ':'ᄈ', 'ᄉᄉ':'ᄊ', 'ᄌᄌ':'ᄍ'}, jung: {'ᅩᅡ':'ᅪ', 'ᅩᅢ':'ᅫ', 'ᅩᅵ':'ᅬ', 'ᅮᅥ':'ᅯ', 'ᅮᅦ':'ᅰ', 'ᅮᅵ':'ᅱ', 'ᅳᅵ':'ᅴ'}, jong: {'ᆨᆨ':'ᆩ', 'ᆨᆺ':'ᆪ', 'ᆫᆽ':'ᆬ', 'ᆫᇂ':'ᆭ', 'ᆯᆨ':'ᆰ', 'ᆯᆷ':'ᆱ', 'ᆯᆸ':'ᆲ', 'ᆯᆺ':'ᆳ', 'ᆯᇀ':'ᆴ', 'ᆯᇁ':'ᆵ', 'ᆯᇂ':'ᆶ', 'ᆸᆺ':'ᆹ', 'ᆺᆺ':'ᆻ'}} 
-const COMB_SEBEOL_FINAL = {cho: {'ᄀᄀ':'ᄁ', 'ᄃᄃ':'ᄄ', 'ᄇᄇ':'ᄈ', 'ᄉᄉ':'ᄊ', 'ᄌᄌ':'ᄍ'}, jung: {'ᅩᅡ':'ᅪ', 'ᅩᅢ':'ᅫ', 'ᅩᅵ':'ᅬ', 'ᅮᅥ':'ᅯ', 'ᅮᅦ':'ᅰ', 'ᅮᅵ':'ᅱ', 'ᅳᅵ':'ᅴ'}, jong: {}} // STRICT mode. 
+const COMB_SEBEOL_FINAL = { 
+	  cho: {'ᄀᄀ':'ᄁ', 'ᄃᄃ':'ᄄ', 'ᄇᄇ':'ᄈ', 'ᄉᄉ':'ᄊ', 'ᄌᄌ':'ᄍ'} 
+	, jung: {'ᅩᅡ':'ᅪ', 'ᅩᅢ':'ᅫ', 'ᅩᅵ':'ᅬ', 'ᅮᅥ':'ᅯ', 'ᅮᅦ':'ᅰ', 'ᅮᅵ':'ᅱ', 'ᅳᅵ':'ᅴ'} 
+	, jong: {} 
+	} 
+// STRICT mode. 
+
+function slashItems([ t ]) { // instant template 
+	let items = t .match( /.+?(\/|$)/g ) 
+	let matching = /(\S+)\s+(.*?)\s*$/ 
+	let list = items .map( item => item .match( matching ) ) 
+	let result = list .reduce( o, ([ m, name, value ]) => o[ name ] = value ) 
+	
+	return result 
+	} // -- slashItems() 
 
 const SEBEOL_390 = new class { 
 	name = '세벌식 390' 
