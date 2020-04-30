@@ -26,11 +26,13 @@ const convert = c => {
 		} 
 	return 0x1000_0000 | CC 
 	} // -- convert() 
-const reverse = code => ( isHangulCode( code ) ? decode( code ) : [ ( code & 0xff_ffff ) ] ) 
-	.filter( code => code != 0 ) 
-	.map( code => String .fromCharCode( code ) ) 
-	.join( '' ) 
-	// -- reverse() 
+const reverse = code => { 
+	let list = isHangulCode( code ) ? decode( code ) 
+		: [ ( code & 0xff_ffff ) ] 
+	let filled = list .filter( code => code != 0 ) 
+	let chars = filled .map( code => String .fromCharCode( code ) ) 
+	return chars .join( '' ) 
+	} // -- reverse() 
 const decode = code => [ 
 	  0x1100 | ( ( code & 0xff_0000 ) >> 0x10 ) - 0x01 
 	, 0x1100 | ( ( code & 0xff00 ) >> 0x08 ) + 0x60 
