@@ -67,9 +67,17 @@ const convertCompatibleJong = (c) => c === '' ? '' : [...c].map(d => CONVERT_JON
 
 const dudgks = (str, fr, to) => convert(str, fr.layout, to.layout).replace(HANGUL_SYLLABLE_2, (match, cho, jung, jong) => convertCompatibleCho(to.combination.cho[cho] || cho) + convertCompatibleJung(to.combination.jung[jung] || jung) + convertCompatibleJong(to.combination.jong[jong] || jong)).normalize('NFC') 
 const jeamfsConvert = (str, fr, to) => convert(str, fr.layout, to.layout).replace(HANGUL_SYLLABLE_3, (match, cho, jung, jong) => (to.combination.cho[cho] || cho) + (to.combination.jung[jung] || jung) + (to.combination.jong[jong] || jong)) 
-const jeamfs = (str, fr, to, doMoachigi) => doMoachigi ? moachigi(jeamfsConvert(str, fr, to)) : ieochigi(jeamfsConvert(str, fr, to)) 
+const jeamfs = ( str, fr, to, doMoachigi ) => { 
+	let converted = jeamfsConvert( str, fr, to ) 
+	let F = doMoachigi ? moachigi : ieochigi 
+	
+	return F( converted ) 
+	} // -- jeamfs() 
 
-const jeamfsORdudgks = (str, fr, to, moachigi) => to.beol == 3 ? jeamfs(str, fr, to, moachigi) : dudgks(str, fr, to) 
+const jeamfsORdudgks = ( str, fr, to, moachigi ) => 
+	  to .beol == 3 ? jeamfs( str, fr, to, moachigi ) 
+	: dudgks( str, fr, to ) 
+	// -- jeamfsORdudgks() 
 
 const output = ( result, alphabet, hangul ) => { 
 	let source = alphabet .name 
