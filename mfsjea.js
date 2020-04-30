@@ -45,19 +45,21 @@ const SEBEOL_390 = {name: '세벌식 390', layout: LAYOUT_SEBEOL_390, combinatio
 const SEBEOL_FINAL = {name: '세벌식 최종', layout: LAYOUT_SEBEOL_FINAL, combination: COMB_SEBEOL_390, beol: 3} 
 const DUBEOL_STANDARD = {name: '두벌식 표준', layout: LAYOUT_DUBEOL_STANDARD, combination: COMB_DUBEOL_STANDARD, beol: 2} 
 
-const HANGUL_LAYOUTS = [DUBEOL_STANDARD, SEBEOL_390, SEBEOL_FINAL] 
+const HANGUL_LAYOUTS = [ DUBEOL_STANDARD, SEBEOL_390, SEBEOL_FINAL ] 
 
-const countRegex = (s, regex) => (s = s.match(regex)) ? s.length : 0 
-const count2350 = (s) => countRegex(s, REGEX_2350) 
-const countNumbers = (s) => { 
-  s = s.match(REGEX_NUMBERS) 
-  let score = 0 
-  if(s === null) return score 
-  s.forEach((c) => { 
-    score += c.length 
-  }) 
-  return score 
-} 
+const countRegex = ( s, regex ) => ( s = s .match( regex ) ) ? s .length : 0 
+const count2350 = s => countRegex( s, REGEX_2350 ) 
+const countNumbers = s => { 
+	s = s .match( REGEX_NUMBERS ) 
+	let score = 0 
+	if ( s === null ) { 
+		return score 
+		} 
+	for ( c of s ) { 
+		score += c .length 
+		} 
+	return score 
+	} // -- countNumbers() 
 
 const convert = ( str, fr, to ) => [ ... str ] 
 	.map( c => to[ fr .indexOf( c ) ] || c ) 
