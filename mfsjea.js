@@ -41,9 +41,24 @@ const COMB_DUBEOL_STANDARD = {cho: {}, jung: {'ㅗㅏ':'ㅘ', 'ㅗㅐ':'ㅙ', '�
 const COMB_SEBEOL_390 = {cho: {'ᄀᄀ':'ᄁ', 'ᄃᄃ':'ᄄ', 'ᄇᄇ':'ᄈ', 'ᄉᄉ':'ᄊ', 'ᄌᄌ':'ᄍ'}, jung: {'ᅩᅡ':'ᅪ', 'ᅩᅢ':'ᅫ', 'ᅩᅵ':'ᅬ', 'ᅮᅥ':'ᅯ', 'ᅮᅦ':'ᅰ', 'ᅮᅵ':'ᅱ', 'ᅳᅵ':'ᅴ'}, jong: {'ᆨᆨ':'ᆩ', 'ᆨᆺ':'ᆪ', 'ᆫᆽ':'ᆬ', 'ᆫᇂ':'ᆭ', 'ᆯᆨ':'ᆰ', 'ᆯᆷ':'ᆱ', 'ᆯᆸ':'ᆲ', 'ᆯᆺ':'ᆳ', 'ᆯᇀ':'ᆴ', 'ᆯᇁ':'ᆵ', 'ᆯᇂ':'ᆶ', 'ᆸᆺ':'ᆹ', 'ᆺᆺ':'ᆻ'}} 
 const COMB_SEBEOL_FINAL = {cho: {'ᄀᄀ':'ᄁ', 'ᄃᄃ':'ᄄ', 'ᄇᄇ':'ᄈ', 'ᄉᄉ':'ᄊ', 'ᄌᄌ':'ᄍ'}, jung: {'ᅩᅡ':'ᅪ', 'ᅩᅢ':'ᅫ', 'ᅩᅵ':'ᅬ', 'ᅮᅥ':'ᅯ', 'ᅮᅦ':'ᅰ', 'ᅮᅵ':'ᅱ', 'ᅳᅵ':'ᅴ'}, jong: {}} // STRICT mode. 
 
-const SEBEOL_390 = {name: '세벌식 390', layout: LAYOUT_SEBEOL_390, combination: COMB_SEBEOL_390, beol: 3} 
-const SEBEOL_FINAL = {name: '세벌식 최종', layout: LAYOUT_SEBEOL_FINAL, combination: COMB_SEBEOL_390, beol: 3} 
-const DUBEOL_STANDARD = {name: '두벌식 표준', layout: LAYOUT_DUBEOL_STANDARD, combination: COMB_DUBEOL_STANDARD, beol: 2} 
+const SEBEOL_390 = new class { 
+	name = '세벌식 390' 
+	layout = LAYOUT_SEBEOL_390 
+	combination = COMB_SEBEOL_390 
+	beol = 3 
+	} // -- SEBEOL_390 
+const SEBEOL_FINAL = new class { 
+	name = '세벌식 최종' 
+	layout = LAYOUT_SEBEOL_FINAL 
+	combination = COMB_SEBEOL_390 
+	beol = 3 
+	} // -- SEBEOL_FINAL 
+const DUBEOL_STANDARD = new class { 
+	name = '두벌식 표준' 
+	layout = LAYOUT_DUBEOL_STANDARD 
+	combination = COMB_DUBEOL_STANDARD 
+	beol = 2 
+	} // -- DUBEOL_STANDARD 
 
 const HANGUL_LAYOUTS = [ DUBEOL_STANDARD, SEBEOL_390, SEBEOL_FINAL ] 
 
