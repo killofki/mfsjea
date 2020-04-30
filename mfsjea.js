@@ -71,13 +71,17 @@ const jeamfs = (str, fr, to, doMoachigi) => doMoachigi ? moachigi(jeamfsConvert(
 
 const jeamfsORdudgks = (str, fr, to, moachigi) => to.beol == 3 ? jeamfs(str, fr, to, moachigi) : dudgks(str, fr, to) 
 
-const output = ( result, alphabet, hangul ) => ({ 
-	  source : alphabet .name 
-	, destination : hangul .name 
-	, str : result 
-	, count : count2350( result ) 
-	, score : count2350( result ) * 10 + countNumbers( result ) + countRegex( result, REGEX_PARENTHESIS ) * 10 - countRegex( result, REGEX_JAMO ) * 50 
-	} ) 
+const output = ( result, alphabet, hangul ) => { 
+	let source = alphabet .name 
+	let destination = hangul .name 
+	let str = result 
+	let count = count2350( result ) 
+	let numbers = countNumbers( result ) 
+	let parens = countRegex( result, REGEX_PARENTHESIS ) 
+	let jamos = countRegex( result, REGEX_JAMO ) 
+	let score = count * 10 + numbers + parens * 10 + jamos * 50 
+	return { source, destination, str, count, score } 
+	} // -- output() 
 const jeamfsList = ( str, moachigi = true ) => 
 	ALPHABET_LAYOUTS .flatMap( alphabet => 
 		HANGUL_LAYOUTS .map( hangul => output( 
