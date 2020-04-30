@@ -68,11 +68,11 @@ const convertCompatibleJong = (c) => c === '' ? '' : [...c].map(d => CONVERT_JON
 const dudgks = (str, fr, to) => convert(str, fr.layout, to.layout).replace(HANGUL_SYLLABLE_2, (match, cho, jung, jong) => convertCompatibleCho(to.combination.cho[cho] || cho) + convertCompatibleJung(to.combination.jung[jung] || jung) + convertCompatibleJong(to.combination.jong[jong] || jong)).normalize('NFC') 
 const jeamfsConvert = ( str, fr, to ) => 
 	convert( str, fr .layout, to .layout ) 
-	.replace( HANGUL_SYLLABLE_3, ( match, cho, jung, jong ) => 
-		  ( to .combination .cho[ cho ] || cho ) 
-		+ ( to .combination .jung[ jung ] || jung ) 
-		+ ( to .combination .jong[ jong ] || jong ) 
-		) 
+	.replace( HANGUL_SYLLABLE_3, ( match, choV, jungV, jongV ) => { 
+		let { cho, jong, jong } = to .combination 
+		return ( cho[ choV ] || choV ) + ( jung[ jungV ] || jungV ) + ( jong[ jongV ] || jongV ) 
+		} ) 
+	// -- jeamfsConvert() 
 const jeamfs = ( str, fr, to, doMoachigi ) => { 
 	let converted = jeamfsConvert( str, fr, to ) 
 	let F = doMoachigi ? moachigi : ieochigi 
