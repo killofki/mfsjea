@@ -72,7 +72,15 @@ const jeamfs = (str, fr, to, doMoachigi) => doMoachigi ? moachigi(jeamfsConvert(
 const jeamfsORdudgks = (str, fr, to, moachigi) => to.beol == 3 ? jeamfs(str, fr, to, moachigi) : dudgks(str, fr, to) 
 
 const output = (result, alphabet, hangul) => ({source: alphabet.name, destination: hangul.name, str: result, count: count2350(result), score: count2350(result)*10 + countNumbers(result) + countRegex(result, REGEX_PARENTHESIS)*10 - countRegex(result, REGEX_JAMO)*50}) 
-const jeamfsList = (str, moachigi=true) => ALPHABET_LAYOUTS.flatMap(alphabet => HANGUL_LAYOUTS.map(hangul => output(jeamfsORdudgks(str, alphabet, hangul, moachigi), alphabet, hangul))) 
+const jeamfsList = ( str, moachigi = true ) => 
+	ALPHABET_LAYOUTS .flatMap( alphabet => 
+		HANGUL_LAYOUTS .map( hangul => output( 
+			  jeamfsORdudgks( str, alphabet, hangul, moachigi ) 
+			, alphabet 
+			, hangul 
+			) ) // -- output // -- map 
+		) // -- flatMap 
+	// -- jeamfsList() 
 
 const jeamfsAuto = ( str, moachigi ) => { 
 	let sorted = jeamfsList( str, moachigi ) 
