@@ -59,11 +59,23 @@ const countNumbers = (s) => {
   return score 
 } 
 
-const convert = (str, fr, to) => [...str].map(c => to[fr.indexOf(c)] || c).join('') 
+const convert = ( str, fr, to ) => [ ... str ] 
+	.map( c => to[ fr .indexOf( c ) ] || c ) 
+	.join( '' ) 
 
-const convertCompatibleCho = (c) => [...c].map(d => CONVERT_CHO[COMPAT_CHO.indexOf(d)]) 
-const convertCompatibleJung = (c) => [...c].map(d => STD_JUNG[COMPAT_JUNG.indexOf(d)]) 
-const convertCompatibleJong = (c) => c === '' ? '' : [...c].map(d => CONVERT_JONG[COMPAT_CHO.indexOf(d)]) 
+const convertCompatibleCho = c => [ ... c ] .map( d => 
+	CONVERT_CHO[ COMPAT_CHO .indexOf( d ) ] 
+	) 
+	// -- convertCompatibleCho() 
+const convertCompatibleJung = c => [ ... c ] .map( d => 
+	STD_JUNG[ COMPAT_JUNG .indexOf( d ) ] 
+	) 
+	// -- convertCompatiblelJung() 
+const convertCompatibleJong = c => c === '' ? '' 
+	: [ ... c ] .map( d => 
+		CONVERT_JONG[ COMPAT_CHO .indexOf( d ) ] 
+		) 
+	// -- convertCompatibleJong() 
 
 const dudgks = ( str, fr, to ) => convert( str, fr .layout, to .layout ) 
 	.replace( HANGUL_SYLLABLE_2, ( match, choV, jungV, jongV ) => { 
