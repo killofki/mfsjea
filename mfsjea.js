@@ -76,9 +76,11 @@ const output = ( result, alphabet, hangul ) => {
 	let destination = hangul .name 
 	let str = result 
 	let count = count2350( result ) 
+	
 	let numbers = countNumbers( result ) 
 	let parens = countRegex( result, REGEX_PARENTHESIS ) 
 	let jamos = countRegex( result, REGEX_JAMO ) 
+	
 	let score = count * 10 + numbers + parens * 10 + jamos * 50 
 	return { source, destination, str, count, score } 
 	} // -- output() 
