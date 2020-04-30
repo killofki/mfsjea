@@ -33,12 +33,14 @@ const reverse = code => {
 	let chars = filled .map( code => String .fromCharCode( code ) ) 
 	return chars .join( '' ) 
 	} // -- reverse() 
-const decode = code => [ 
-	  0x1100 | ( ( code & 0xff_0000 ) >> 0x10 ) - 0x01 
-	, 0x1100 | ( ( code & 0xff00 ) >> 0x08 ) + 0x60 
-	, hasJong( code ) ? ( 0x1100 | ( code & 0xff ) + 0xa7 ) : 0 
-	] 
-	// -- decode() 
+const decode = code => { 
+	let bb = ( ( code & 0xff_0000 ) >> 0x10 ) - 0x01 
+	let cc = ( ( code & 0xff00 ) >> 0x08 ) + 0x60 
+	let dd = ( code & 0xff ) + 0xa7 
+	; [ bb, cc, dd ] = [ bb, cc, dd ] .map( v => 0x1100 | v ) 
+	
+	return [ bb, cc, hasJong ? dd : 0 ] 
+	} // -- decode() 
 const compose = ( composing, input ) => hasCho( input ) ? cho( composing, input ) 
 	: hasJung( input ) ? jung( composing, input ) 
 	: hasJong( input ) ? jong( composing, input ) 
