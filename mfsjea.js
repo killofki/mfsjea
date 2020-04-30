@@ -66,17 +66,24 @@ const convertCompatibleJung = (c) => [...c].map(d => STD_JUNG[COMPAT_JUNG.indexO
 const convertCompatibleJong = (c) => c === '' ? '' : [...c].map(d => CONVERT_JONG[COMPAT_CHO.indexOf(d)]) 
 
 const dudgks = ( str, fr, to ) => convert( str, fr .layout, to .layout ) 
-	.replace( HANGUL_SYLLABLE_2, ( match, cho, jung, jong ) => 
-		  convertCompatibleCho( to .combination. cho[ cho ] || cho ) 
-		+ convertCompatibleJung( to .combination .jung[ jung ] || jung ) 
-		+ convertCompatibleJong( to .combination .jong[ jong ] || jong ) 
-		) 
+	.replace( HANGUL_SYLLABLE_2, ( match, choV, jungV, jongV ) => { 
+		let { cho, jung, jong } = to .combination 
+		let choC = convertCompatibleCho( cho[ choV ] || choV ) 
+		let jungC = convertCompatibleJung( jung[ jungV ] || jungV ) 
+		let jongC = convertCompatibleJong( jong[ jongV ] || jongV ) 
+		
+		return choC + jungC + jongC 
+		} ) 
 	.normalize( 'NFC' ) 
 	// -- dudgks() 
 const jeamfsConvert = ( str, fr, to ) => convert( str, fr .layout, to .layout ) 
 	.replace( HANGUL_SYLLABLE_3, ( match, choV, jungV, jongV ) => { 
 		let { cho, jong, jong } = to .combination 
-		return ( cho[ choV ] || choV ) + ( jung[ jungV ] || jungV ) + ( jong[ jongV ] || jongV ) 
+		let choC = cho[ choV ] || choV 
+		let jungC = jung[ jungV ] || jungV 
+		let jongC = jong[ jongV ] || jongV 
+		
+		return choC + jungC + jongC 
 		} ) 
 	// -- jeamfsConvert() 
 const jeamfs = ( str, fr, to, doMoachigi ) => { 
