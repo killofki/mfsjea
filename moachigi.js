@@ -8,10 +8,15 @@ const composeString = str => [ ... str ]
 	.join( '' ) 
 	.normalize( 'NFC' ) 
 
-const convert = c => isCho( c ) ? 0x1000_0000 | ( code( c ) & 0xff ) + 0x01 << 0x10 
-	: isJung( c ) ? 0x1000_0000 | ( code( c ) & 0xff ) - 0x60 << 0x08 
-	: isJong( c ) ? 0x1000_0000 | ( code( c ) & 0xff ) - 0xa7 
-	: code( c ) 
+const convert = c => { 
+	let cc = code( c ) 
+	let CC = cc & 0xff 
+	
+	return isCho( c ) ? 0x1000_0000 | CC + 0x01 << 0x10 
+		: isJung( c ) ? 0x1000_0000 | CC - 0x60 << 0x08 
+		: isJong( c ) ? 0x1000_0000 | CC - 0xa7 
+		: cc 
+	} // -- convert() 
 const reverse = code => ( isHangulCode( code ) ? decode(code) : [ ( code & 0xff_ffff ) ] ) 
 	.filter( code => code != 0 ) 
 	.map( code => String .fromCharCode( code ) ) 
