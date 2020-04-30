@@ -28,7 +28,7 @@ const convert = c => {
 	} // -- convert() 
 const reverse = code => { 
 	let list = isHangulCode( code ) ? decode( code ) 
-		: [ ( code & 0xff_ffff ) ] 
+		: [ code & 0xff_ffff ] 
 	let filled = list .filter( code => code != 0 ) 
 	let chars = filled .map( code => String .fromCharCode( code ) ) 
 	return chars .join( '' ) 
