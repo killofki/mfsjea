@@ -1,9 +1,9 @@
 
 const composeString = str => [ ... str ] 
-	.reduce( ( a, c ) => 
-		  a .slice( 0, -1 ) .concat( compose( a[ a .length - 1 ], convert( c ) ) ) 
-		, [ 0 ] 
-		) 
+	.reduce( ( a, c ) => { 
+		let pickLast = a .splice( -1 ) 
+		return a .concat( compose( pickLast, convert( c ) ) ) 
+		}, [ 0 ] ) 
 	.flatMap( code => reverse( code ) ) 
 	.join( '' ) 
 	.normalize( 'NFC' ) 
