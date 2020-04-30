@@ -30,17 +30,18 @@ const reverse = code => ( isHangulCode( code ) ? decode( code ) : [ ( code & 0xf
 	.filter( code => code != 0 ) 
 	.map( code => String .fromCharCode( code ) ) 
 	.join( '' ) 
+	// -- reverse() 
 const decode = code => [ 
 	  0x1100 | ( ( code & 0xff_0000 ) >> 0x10 ) - 0x01 
 	, 0x1100 | ( ( code & 0xff00 ) >> 0x08 ) + 0x60 
 	, hasJong( code ) ? ( 0x1100 | ( code & 0xff ) + 0xa7 ) : 0 
 	] 
-
+	// -- decode() 
 const compose = ( composing, input ) => hasCho( input ) ? cho( composing, input ) 
 	: hasJung( input ) ? jung( composing, input ) 
 	: hasJong( input ) ? jong( composing, input ) 
 	: [ composing, input ] 
-
+	// -- compose() 
 const isCho = input => range( input .charCodeAt(), 0x1100, 0x1112 ) 
 const isJung = input => range( input .charCodeAt(), 0x1161, 0x1175 ) 
 const isJong = input => range( input .charCodeAt(), 0x11a8, 0x11c2 ) 
@@ -49,21 +50,27 @@ const code = c => c .charCodeAt( 0 )
 
 const hasCho = code => isHangulCode( code ) 
 	&& ( code & 0xff_0000 ) != 0 
+	// -- hasCho() 
 const hasJung = code => isHangulCode( code ) 
 	&& ( code & 0xff00 ) != 0 
+	// -- hasJung() 
 const hasJong = code => isHangulCode( code ) 
 	&& ( code & 0xff ) != 0 
+	// -- hasJong() 
 
 const isHangulCode = code => ( code & 0x1000_0000 ) != 0 
 
 const cho = ( composing, input ) => isHangulCode( composing ) 
 	? hasCho( composing ) ? [ composing, input ] : composing | input 
 	: [ composing, input ] 
+	// -- cho() 
 const jung = ( composing, input ) => isHangulCode( composing ) 
 	? hasJung( composing ) ? [ composing, input ] : composing | input 
 	: [ composing, input ] 
+	// -- jung() 
 const jong = ( composing, input ) => isHangulCode( composing ) 
 	? hasJong( composing ) ? [ composing, input ] : composing | input 
 	: [ composing, input ] 
+	// -- jong() 
 
 module .exports = composeString 
