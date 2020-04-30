@@ -71,7 +71,8 @@ const jeamfsConvert = ( str, fr, to ) =>
 	.replace( HANGUL_SYLLABLE_3, ( match, cho, jung, jong ) => 
 		  ( to .combination .cho[ cho ] || cho ) 
 		+ ( to .combination .jung[ jung ] || jung ) 
-		+ ( to .combination .jong[ jong ] || jong ) ) 
+		+ ( to .combination .jong[ jong ] || jong ) 
+		) 
 const jeamfs = ( str, fr, to, doMoachigi ) => { 
 	let converted = jeamfsConvert( str, fr, to ) 
 	let F = doMoachigi ? moachigi : ieochigi 
