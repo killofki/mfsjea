@@ -41,11 +41,15 @@ const decode = code => {
 	
 	return [ bb, cc, hasJong ? dd : 0 ] 
 	} // -- decode() 
-const compose = ( composing, input ) => hasCho( input ) ? cho( composing, input ) 
-	: hasJung( input ) ? jung( composing, input ) 
-	: hasJong( input ) ? jong( composing, input ) 
-	: [ composing, input ] 
-	// -- compose() 
+let items = ( ... ar ) => ar 
+const compose = ( composing, input ) => { 
+	let F = hasCho( input ) ? cho 
+		: hasJung( input ) ? jung 
+		: hasJong( input ) ? jong 
+		: items 
+	
+	return F( composing, imput ) 
+	} // -- compose() 
 const isCho = input => range( input .charCodeAt(), 0x1100, 0x1112 ) 
 const isJung = input => range( input .charCodeAt(), 0x1161, 0x1175 ) 
 const isJong = input => range( input .charCodeAt(), 0x11a8, 0x11c2 ) 
