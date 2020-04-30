@@ -54,7 +54,7 @@ const isCho = input => range( input .charCodeAt(), 0x1100, 0x1112 )
 const isJung = input => range( input .charCodeAt(), 0x1161, 0x1175 ) 
 const isJong = input => range( input .charCodeAt(), 0x11a8, 0x11c2 ) 
 const range = ( num, a, b ) => num >= a && num <= b 
-const code = c => c .charCodeAt( 0 ) 
+const code = c => c .charCodeAt() 
 
 const hasCho = code => isHangulCode( code ) 
 	&& ( code & 0xff_0000 ) != 0 
