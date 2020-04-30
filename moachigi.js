@@ -26,7 +26,7 @@ const convert = c => {
 		} 
 	return 0x1000_0000 | CC 
 	} // -- convert() 
-const reverse = code => ( isHangulCode( code ) ? decode(code) : [ ( code & 0xff_ffff ) ] ) 
+const reverse = code => ( isHangulCode( code ) ? decode( code ) : [ ( code & 0xff_ffff ) ] ) 
 	.filter( code => code != 0 ) 
 	.map( code => String .fromCharCode( code ) ) 
 	.join( '' ) 
