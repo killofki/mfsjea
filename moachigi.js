@@ -68,16 +68,16 @@ const hasJong = code => isHangulCode( code )
 
 const isHangulCode = code => ( code & 0x1000_0000 ) != 0 
 
-const cho = ( composing, input ) => isHangulCode( composing ) 
-	? hasCho( composing ) ? [ composing, input ] : composing | input 
+const cho = ( composing, input ) => 
+	  isHangulCode( composing ) && ! hasCho( composing ) ? : composing | input 
 	: [ composing, input ] 
 	// -- cho() 
-const jung = ( composing, input ) => isHangulCode( composing ) 
-	? hasJung( composing ) ? [ composing, input ] : composing | input 
+const jung = ( composing, input ) => 
+	  isHangulCode( composing ) && ! hasJung( composing ) ? composing | input 
 	: [ composing, input ] 
 	// -- jung() 
-const jong = ( composing, input ) => isHangulCode( composing ) 
-	? hasJong( composing ) ? [ composing, input ] : composing | input 
+const jong = ( composing, input ) => 
+	  isHangulCode( composing ) && ! hasJong( composing ) ? composing | input 
 	: [ composing, input ] 
 	// -- jong() 
 
