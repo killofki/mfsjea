@@ -48,6 +48,9 @@ const COMB_SEBEOL_FINAL = {
 
 function slashItems([ t ]) { // instant template 
 	let items = t .match( /.+?(\/|$)/g ) 
+	if ( ! items ) { 
+		return {} 
+		} 
 	let matching = /(\S+)\s+(.*?)\s*$/ 
 	let list = items .map( item => item .match( matching ) ) 
 	let result = list .reduce( ( o, [ m, name, value ] ) => o[ name ] = value, {} ) 
