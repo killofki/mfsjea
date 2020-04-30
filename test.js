@@ -3,7 +3,7 @@ const mfsjea = require( './mfsjea.js' )
 const readline = require( 'readline' ) 
 
 const rl = readline .createInterface( new class { 
-	input = process .stdin, 
+	input = process .stdin 
 	output = process .stdout 
 	prompt = '> ' 
 	} ) 
